@@ -9,6 +9,6 @@ import numpy as np
 
 if __name__ == '__main__':
     dc = DataCollector()
-    dc.runStudent(2)
+    dc.runStudent(100, 50)
     # data = np.load('data.npy', allow_pickle=True)
     # print(data)

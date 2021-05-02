@@ -32,16 +32,23 @@ class DataCollector:
 
         return studentList
 
-    def runStudent(self, studentNumber):
+    def runStudent(self, studentNumber, duration):
+        """
+        Simulation on student
+        :param studentNumber:Input the number of student you want to simulate
+        :param duration: Input the duration you want to simulate
+        :return: data that contains student simulation
+        """
         studentList = self.generateStudent(studentNumber)
         dataList = []
         for s in studentList:
             print('Processing')
-            for t in range(1, 20):
+            for t in range(1, duration + 1):
                 s.updateKnowledge(t)
             dataList.append(s.data)
             print(s.data)
         dataList = np.array(dataList)
+        # save the result to local
         np.save('data', dataList, allow_pickle=True, fix_imports=True)
         return dataList
 
