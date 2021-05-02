@@ -13,7 +13,7 @@ class Student:
         self.basicInfo = basicInfo
         self.fundaments = self.generateBasicKnowledge()
         self.coefficientEffect = self.generateCoefficientEffect()
-        self.data = [self.fundaments]
+        self.data = [np.dot(self.coefficientEffect, self.fundaments)]
 
     @staticmethod
     def generateMajor():
@@ -160,8 +160,9 @@ class Student:
         selfLearning = self.getSelfLearning(timePoint)
         focus = self.getFocus(timePoint)
 
-        knowledge = np.sum(np.dot(self.coefficientEffect,
-                                  0.4 * patience + 0.3 * interest + 0.2 * selfLearning + 0.1 * focus)) + self.fundaments
+        knowledge = np.dot(self.coefficientEffect, 0.4 * patience + 0.3 * interest + 0.2 * selfLearning + 0.1 * focus) \
+                    + np.dot(self.coefficientEffect / np.sum(np.dot(self.coefficientEffect, self.fundaments)),
+                             self.fundaments)
         self.data.append(knowledge)
         return knowledge
 
