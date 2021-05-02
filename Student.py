@@ -8,8 +8,8 @@ from sympy import *
 
 
 class Student:
-    def __init__(self, basicInfo):
-        self.major = self.generateMajor()
+    def __init__(self, major, basicInfo):
+        self.major = major
         self.basicInfo = basicInfo
         self.fundaments = self.generateBasicKnowledge()
         self.coefficientEffect = self.generateCoefficientEffect()
