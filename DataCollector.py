@@ -28,7 +28,7 @@ class DataCollector:
             basicInfo = [basic, relatedFamily, finProduct, patience, interest, selfLearning, focus]
             s = Student(major, basicInfo)
             studentList.append(s)
-            print('Student generate complete!')
+        print('Student generate complete!')
 
         return studentList
 
