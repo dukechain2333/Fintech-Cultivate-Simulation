@@ -17,6 +17,7 @@ class Student:
         self.interestMatrix = []
         self.selfLearningMatrix = []
         self.focusMatrix = []
+        self.randomState = 1000
         self.data = [np.dot(self.coefficientEffect, self.fundaments)]
 
     @staticmethod
@@ -53,9 +54,11 @@ class Student:
         :return: coefficient of Effect
         """
         if self.major == '0':
-            coefficientEffect = np.array([6.73, 0])
+            # coefficientEffect = np.array([6.73, 0])
+            coefficientEffect = np.array([2, 0])
         elif self.major == '1':
-            coefficientEffect = np.array([0, 8.04])
+            # coefficientEffect = np.array([0, 8.04])
+            coefficientEffect = np.array([0, 2])
         else:
             coefficientEffect = np.array([2, 3])
 
@@ -87,10 +90,10 @@ class Student:
                              timePoint ** 2) - 0.2245 * timePoint + 6.028
 
         if len(self.forgetMatrix) == 0:
-            tmp = forget + float(np.random.rand(1) * 100)
+            tmp = forget + float(np.random.rand(1) * self.randomState)
             self.forgetMatrix.append(tmp)
         else:
-            tmp = forget + self.forgetMatrix[-1] + float(np.random.rand(1) * 100)
+            tmp = forget + self.forgetMatrix[-1] + float(np.random.rand(1) * self.randomState)
             self.forgetMatrix.append(tmp)
 
         return tmp
@@ -110,10 +113,10 @@ class Student:
             patience = 2.99 * (np.sin(timePoint - np.pi)) + 0.02013 * ((timePoint - 10) ** 2) + 4.003
 
         if len(self.patienceMatrix) == 0:
-            tmp = patience + float(np.random.rand(1) * 100)
+            tmp = patience + float(np.random.rand(1) * self.randomState)
             self.patienceMatrix.append(tmp)
         else:
-            tmp = patience + self.patienceMatrix[-1] + float(np.random.rand(1) * 100)
+            tmp = patience + self.patienceMatrix[-1] + float(np.random.rand(1) * self.randomState)
             self.patienceMatrix.append(tmp)
 
         return tmp
@@ -133,10 +136,10 @@ class Student:
             interest = 0.01066 * (timePoint ** 2) - 0.4039 * timePoint + 6.576
 
         if len(self.interestMatrix) == 0:
-            tmp = interest + float(np.random.rand(1) * 100)
+            tmp = interest + float(np.random.rand(1) * self.randomState)
             self.interestMatrix.append(tmp)
         else:
-            tmp = interest + self.interestMatrix[-1] + float(np.random.rand(1) * 100)
+            tmp = interest + self.interestMatrix[-1] + float(np.random.rand(1) * self.randomState)
             self.interestMatrix.append(tmp)
 
         return tmp
@@ -155,10 +158,10 @@ class Student:
             selfLearning = (-0.006938) * (timePoint ** 2) + 0.2858 * timePoint + 1.628
 
         if len(self.selfLearningMatrix) == 0:
-            tmp = selfLearning + float(np.random.rand(1) * 100)
+            tmp = selfLearning + float(np.random.rand(1) * self.randomState)
             self.selfLearningMatrix.append(tmp)
         else:
-            tmp = selfLearning + self.selfLearningMatrix[-1] + float(np.random.rand(1) * 100)
+            tmp = selfLearning + self.selfLearningMatrix[-1] + float(np.random.rand(1) * self.randomState)
             self.selfLearningMatrix.append(tmp)
 
         return tmp
@@ -177,10 +180,10 @@ class Student:
             focus = 0.00483 * (timePoint ** 2) - 0.2245 * timePoint + 6.028
 
         if len(self.focusMatrix) == 0:
-            tmp = focus + float(np.random.rand(1) * 100)
+            tmp = focus + float(np.random.rand(1) * self.randomState)
             self.focusMatrix.append(tmp)
         else:
-            tmp = focus + self.focusMatrix[-1] + float(np.random.rand(1) * 100)
+            tmp = focus + self.focusMatrix[-1] + float(np.random.rand(1) * self.randomState)
             self.focusMatrix.append(tmp)
 
         return tmp
