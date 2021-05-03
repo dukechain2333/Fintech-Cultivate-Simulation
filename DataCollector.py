@@ -41,12 +41,12 @@ class DataCollector:
         """
         studentList = self.generateStudent(studentNumber)
         dataList = []
+        print('Processing')
         for s in studentList:
-            print('Processing')
             for t in range(1, duration + 1):
                 s.updateKnowledge(t)
             dataList.append(s.data)
-            print(s.data)
+            # print(s.data)
         dataList = np.array(dataList)
         # save the result to local
         np.save('data', dataList, allow_pickle=True, fix_imports=True)
