@@ -4,7 +4,6 @@
 
 import random
 import numpy as np
-from sympy import *
 
 
 class Student:
@@ -13,6 +12,11 @@ class Student:
         self.basicInfo = basicInfo
         self.fundaments = self.generateBasicKnowledge()
         self.coefficientEffect = self.generateCoefficientEffect()
+        self.forgetMatrix = []
+        self.patienceMatrix = []
+        self.interestMatrix = []
+        self.selfLearningMatrix = []
+        self.focusMatrix = []
         self.data = [np.dot(self.coefficientEffect, self.fundaments)]
 
     @staticmethod
@@ -63,27 +67,31 @@ class Student:
         :param timePoint:Input a time point
         :return: the area of forget curve refers to the zero point to timePoint
         """
-        x = symbols("x")
         if self.major == '0':
-            forget = 34.84 * (x ** (-0.2034)) + 12.78 + 4 * (
-                    0.0056 * (x ** 2) - 0.1997 * x + 4.796) + 3 * (
-                             0.004151 * (x ** 2) - 0.1469 * x + 4.559) + 2 * (
-                             0.001208 * (x ** 2) - 0.03826 * x + 3.966) + 0.003468 * (
-                             x ** 2) - 0.1228 * x + 4.48
+            forget = 34.84 * (timePoint ** (-0.2034)) + 12.78 + 4 * (
+                    0.0056 * (timePoint ** 2) - 0.1997 * timePoint + 4.796) + 3 * (
+                             0.004151 * (timePoint ** 2) - 0.1469 * timePoint + 4.559) + 2 * (
+                             0.001208 * (timePoint ** 2) - 0.03826 * timePoint + 3.966) + 0.003468 * (
+                             timePoint ** 2) - 0.1228 * timePoint + 4.48
         elif self.major == '1':
-            forget = 34.84 * (x ** (-0.2034)) + 12.78 + 4 * (
-                    0.009684 * (x ** 2) - 0.3725 * x + 6.08) + 3 * (
-                             (-0.3418) * (x ** 2) - 0.1127 * x + 3.891) + 2 * (
-                             0.005575 * (x ** 2) - 0.2055 * x + 4.888) + 0.00769 * (
-                             x ** 2) - 0.3146 * x + 6.126
+            forget = 34.84 * (timePoint ** (-0.2034)) + 12.78 + 4 * (
+                    0.009684 * (timePoint ** 2) - 0.3725 * timePoint + 6.08) + 3 * (
+                             (-0.3418) * (timePoint ** 2) - 0.1127 * timePoint + 3.891) + 2 * (
+                             0.005575 * (timePoint ** 2) - 0.2055 * timePoint + 4.888) + 0.00769 * (
+                             timePoint ** 2) - 0.3146 * timePoint + 6.126
         else:
-            forget = 34.84 * (x ** (-0.2034)) + 12.78 + 4 * (
-                    2.99 * np.sin(x - np.pi) + 0.02013 * ((x - 10) ** 2) + 4.003) + 3 * (
-                             0.01066 * (x ** 2) - 0.4039 * x + 6.576) + 2 * (
-                             (-0.006938) * (x ** 2) + 0.2858 * x + 1.628) + 0.00483 * (
-                             x ** 2) - 0.2245 * x + 6.028
+            forget = 34.84 * (timePoint ** (-0.2034)) + 12.78 + 4 * (
+                    2.99 * np.sin(timePoint - np.pi) + 0.02013 * ((timePoint - 10) ** 2) + 4.003) + 3 * (
+                             0.01066 * (timePoint ** 2) - 0.4039 * timePoint + 6.576) + 2 * (
+                             (-0.006938) * (timePoint ** 2) + 0.2858 * timePoint + 1.628) + 0.00483 * (
+                             timePoint ** 2) - 0.2245 * timePoint + 6.028
 
-        return integrate(forget, (x, 0, timePoint))
+        if len(self.forgetMatrix) == 0:
+            self.forgetMatrix.append(forget + float(np.random.rand(1)))
+        else:
+            self.forgetMatrix.append(forget + self.forgetMatrix[-1] + float(np.random.rand(1)))
+
+        return forget + self.forgetMatrix[-1] + float(np.random.rand(1))
 
     def getPatience(self, timePoint):
         """
@@ -91,15 +99,19 @@ class Student:
         :param timePoint: Input a time point
         :return: the area of patience curve refers to the zero point to timePoint
         """
-        x = symbols("x")
         if self.major == '0':
-            patience = 0.0056 * (x ** 2) - 0.1997 * x + 4.796
+            patience = 0.0056 * (timePoint ** 2) - 0.1997 * timePoint + 4.796
         elif self.major == '1':
-            patience = 0.009684 * (x ** 2) - 0.3725 * x + 6.08
+            patience = 0.009684 * (timePoint ** 2) - 0.3725 * timePoint + 6.08
         else:
-            patience = 2.99 * (np.sin(x - np.pi)) + 0.02013 * ((x - 10) ** 2) + 4.003
+            patience = 2.99 * (np.sin(timePoint - np.pi)) + 0.02013 * ((timePoint - 10) ** 2) + 4.003
 
-        return integrate(patience, (x, 0, timePoint))
+        if len(self.patienceMatrix) == 0:
+            self.patienceMatrix.append(patience + float(np.random.rand(1)))
+        else:
+            self.patienceMatrix.append(patience + self.patienceMatrix[-1] + float(np.random.rand(1)))
+
+        return patience + self.patienceMatrix[-1] + float(np.random.rand(1))
 
     def getInterest(self, timePoint):
         """
@@ -107,15 +119,19 @@ class Student:
         :param timePoint: Input a time point
         :return: the area of interest curve refers to the zero point to timePoint
         """
-        x = symbols("x")
         if self.major == '0':
-            interest = 0.00415 * (x ** 2) - 0.1469 * x + 4.559
+            interest = 0.00415 * (timePoint ** 2) - 0.1469 * timePoint + 4.559
         elif self.major == '1':
-            interest = (-0.3418) * (x ** 2) + 0.1127 * x + 3.891
+            interest = (-0.3418) * (timePoint ** 2) + 0.1127 * timePoint + 3.891
         else:
-            interest = 0.01066 * (x ** 2) - 0.4039 * x + 6.576
+            interest = 0.01066 * (timePoint ** 2) - 0.4039 * timePoint + 6.576
 
-        return integrate(interest, (x, 0, timePoint))
+        if len(self.interestMatrix) == 0:
+            self.interestMatrix.append(interest + float(np.random.rand(1)))
+        else:
+            self.interestMatrix.append(interest + self.interestMatrix[-1] + float(np.random.rand(1)))
+
+        return interest + self.interestMatrix[-1] + float(np.random.rand(1))
 
     def getSelfLearning(self, timePoint):
         """
@@ -123,15 +139,19 @@ class Student:
         :param timePoint: Input a time point
         :return: the area of self-learning curve refers to the zero point to timePoint
         """
-        x = symbols("x")
         if self.major == '0':
-            selfLearning = 0.001208 * (x ** 2) - 0.03826 * x + 3.966
+            selfLearning = 0.001208 * (timePoint ** 2) - 0.03826 * timePoint + 3.966
         elif self.major == '1':
-            selfLearning = 0.005575 * (x ** 2) - 0.2055 * x + 4.888
+            selfLearning = 0.005575 * (timePoint ** 2) - 0.2055 * timePoint + 4.888
         else:
-            selfLearning = (-0.006938) * (x ** 2) + 0.2858 * x + 1.628
+            selfLearning = (-0.006938) * (timePoint ** 2) + 0.2858 * timePoint + 1.628
 
-        return integrate(selfLearning, (x, 0, timePoint))
+        if len(self.selfLearningMatrix) == 0:
+            self.selfLearningMatrix.append(selfLearning + float(np.random.rand(1)))
+        else:
+            self.selfLearningMatrix.append(selfLearning + self.selfLearningMatrix[-1] + float(np.random.rand(1)))
+
+        return selfLearning + self.selfLearningMatrix[-1] + float(np.random.rand(1))
 
     def getFocus(self, timePoint):
         """
@@ -139,15 +159,19 @@ class Student:
         :param timePoint: Input a time point
         :return: the area of focus curve refers to the zero point to timePoint
         """
-        x = symbols("x")
         if self.major == "0":
-            focus = 0.003468 * (x ** 2) - 0.1228 * x + 4.48
+            focus = 0.003468 * (timePoint ** 2) - 0.1228 * timePoint + 4.48
         elif self.major == '1':
-            focus = 0.00769 * (x ** 2) - 0.3146 * x + 6.126
+            focus = 0.00769 * (timePoint ** 2) - 0.3146 * timePoint + 6.126
         else:
-            focus = 0.00483 * (x ** 2) - 0.2245 * x + 6.028
+            focus = 0.00483 * (timePoint ** 2) - 0.2245 * timePoint + 6.028
 
-        return integrate(focus, (x, 0, timePoint))
+        if len(self.focusMatrix) == 0:
+            self.focusMatrix.append(focus + float(np.random.rand(1)))
+        else:
+            self.focusMatrix.append(focus + self.focusMatrix[-1] + float(np.random.rand(1)))
+
+        return focus + self.focusMatrix[-1] + float(np.random.rand(1))
 
     def updateKnowledge(self, timePoint):
         """
