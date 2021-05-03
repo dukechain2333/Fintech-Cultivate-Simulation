@@ -87,11 +87,13 @@ class Student:
                              timePoint ** 2) - 0.2245 * timePoint + 6.028
 
         if len(self.forgetMatrix) == 0:
-            self.forgetMatrix.append(forget + float(np.random.rand(1)))
+            tmp = forget + float(np.random.rand(1) * 100)
+            self.forgetMatrix.append(tmp)
         else:
-            self.forgetMatrix.append(forget + self.forgetMatrix[-1] + float(np.random.rand(1)))
+            tmp = forget + self.forgetMatrix[-1] + float(np.random.rand(1) * 100)
+            self.forgetMatrix.append(tmp)
 
-        return forget + self.forgetMatrix[-1] + float(np.random.rand(1))
+        return tmp
 
     def getPatience(self, timePoint):
         """
@@ -102,16 +104,19 @@ class Student:
         if self.major == '0':
             patience = 0.0056 * (timePoint ** 2) - 0.1997 * timePoint + 4.796
         elif self.major == '1':
-            patience = 0.009684 * (timePoint ** 2) - 0.3725 * timePoint + 6.08
+            # patience = 0.009684 * (timePoint ** 2) - 0.3725 * timePoint + 6.08
+            patience = 0.0002152 * ((timePoint - 5) ** 3) - 0.1519 * timePoint + 4.815
         else:
             patience = 2.99 * (np.sin(timePoint - np.pi)) + 0.02013 * ((timePoint - 10) ** 2) + 4.003
 
         if len(self.patienceMatrix) == 0:
-            self.patienceMatrix.append(patience + float(np.random.rand(1)))
+            tmp = patience + float(np.random.rand(1) * 100)
+            self.patienceMatrix.append(tmp)
         else:
-            self.patienceMatrix.append(patience + self.patienceMatrix[-1] + float(np.random.rand(1)))
+            tmp = patience + self.patienceMatrix[-1] + float(np.random.rand(1) * 100)
+            self.patienceMatrix.append(tmp)
 
-        return patience + self.patienceMatrix[-1] + float(np.random.rand(1))
+        return tmp
 
     def getInterest(self, timePoint):
         """
@@ -122,16 +127,19 @@ class Student:
         if self.major == '0':
             interest = 0.00415 * (timePoint ** 2) - 0.1469 * timePoint + 4.559
         elif self.major == '1':
-            interest = (-0.3418) * (timePoint ** 2) + 0.1127 * timePoint + 3.891
+            # interest = (-0.3418) * (timePoint ** 2) + 0.1127 * timePoint + 3.891
+            interest = 2.145 * (timePoint ** 0.2019)
         else:
             interest = 0.01066 * (timePoint ** 2) - 0.4039 * timePoint + 6.576
 
         if len(self.interestMatrix) == 0:
-            self.interestMatrix.append(interest + float(np.random.rand(1)))
+            tmp = interest + float(np.random.rand(1) * 100)
+            self.interestMatrix.append(tmp)
         else:
-            self.interestMatrix.append(interest + self.interestMatrix[-1] + float(np.random.rand(1)))
+            tmp = interest + self.interestMatrix[-1] + float(np.random.rand(1) * 100)
+            self.interestMatrix.append(tmp)
 
-        return interest + self.interestMatrix[-1] + float(np.random.rand(1))
+        return tmp
 
     def getSelfLearning(self, timePoint):
         """
@@ -147,11 +155,13 @@ class Student:
             selfLearning = (-0.006938) * (timePoint ** 2) + 0.2858 * timePoint + 1.628
 
         if len(self.selfLearningMatrix) == 0:
-            self.selfLearningMatrix.append(selfLearning + float(np.random.rand(1)))
+            tmp = selfLearning + float(np.random.rand(1) * 100)
+            self.selfLearningMatrix.append(tmp)
         else:
-            self.selfLearningMatrix.append(selfLearning + self.selfLearningMatrix[-1] + float(np.random.rand(1)))
+            tmp = selfLearning + self.selfLearningMatrix[-1] + float(np.random.rand(1) * 100)
+            self.selfLearningMatrix.append(tmp)
 
-        return selfLearning + self.selfLearningMatrix[-1] + float(np.random.rand(1))
+        return tmp
 
     def getFocus(self, timePoint):
         """
@@ -167,11 +177,13 @@ class Student:
             focus = 0.00483 * (timePoint ** 2) - 0.2245 * timePoint + 6.028
 
         if len(self.focusMatrix) == 0:
-            self.focusMatrix.append(focus + float(np.random.rand(1)))
+            tmp = focus + float(np.random.rand(1) * 100)
+            self.focusMatrix.append(tmp)
         else:
-            self.focusMatrix.append(focus + self.focusMatrix[-1] + float(np.random.rand(1)))
+            tmp = focus + self.focusMatrix[-1] + float(np.random.rand(1) * 100)
+            self.focusMatrix.append(tmp)
 
-        return focus + self.focusMatrix[-1] + float(np.random.rand(1))
+        return tmp
 
     def updateKnowledge(self, timePoint):
         """
