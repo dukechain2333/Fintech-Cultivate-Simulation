@@ -11,8 +11,10 @@ from matplotlib.animation import FuncAnimation
 
 fig = plt.figure(figsize=(8, 6))
 ax1 = Axes3D(fig)
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 dc = DataCollector()
-dc.runStudent(1000, 50)
+dc.runStudent(1000, 4)
 data = np.load('data.npy', allow_pickle=True)
 
 
@@ -35,9 +37,9 @@ def drawPicture(i):
         ax1.plot3D(newData[s][:, 0], newData[s][:, 2], newData[s][:, 1])
         # ax1.plot3D(newData[s][i, 0], newData[s][i, 2], newData[s][i, 1])
         # ax1.plot3D(newData[i][:, 0], newData[i][:, 2], newData[i][:, 1])
-    ax1.set_ylabel('time')
-    ax1.set_xlabel('Ability of Finance')
-    ax1.set_zlabel('Ability of Computer Science')
+    ax1.set_ylabel('时间')
+    ax1.set_xlabel('金融能力')
+    ax1.set_zlabel('计算机能力')
     ax1.grid(True)
     ax1.view_init(10, 50)
     fig.savefig('Simulation.png')
@@ -54,6 +56,6 @@ if __name__ == '__main__':
     # fig = plt.figure(figsize=(10, 10))
     # ax1 = Axes3D(fig)
     # print(data[0])
-    anim = FuncAnimation(fig, drawPicture, 20)
-    anim.save('simu.gif', writer='imagemagick')
+    # anim = FuncAnimation(fig, drawPicture, 20)
+    # anim.save('simu.gif', writer='imagemagick')
     drawPicture(1)
