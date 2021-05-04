@@ -14,7 +14,7 @@ ax1 = Axes3D(fig)
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
 dc = DataCollector()
-dc.runStudent(1000, 4)
+dc.runStudent(1000, 40)
 data = np.load('data.npy', allow_pickle=True)
 
 
