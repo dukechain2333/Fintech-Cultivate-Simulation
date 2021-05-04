@@ -48,14 +48,4 @@ def drawPicture(i):
 
 
 if __name__ == '__main__':
-    # dc = DataCollector()
-    # dc.runStudent(1000, 50)
-    # data = np.load('data.npy', allow_pickle=True)
-    # print(data)
-    # print(data.shape)
-    # fig = plt.figure(figsize=(10, 10))
-    # ax1 = Axes3D(fig)
-    # print(data[0])
-    # anim = FuncAnimation(fig, drawPicture, 20)
-    # anim.save('simu.gif', writer='imagemagick')
     drawPicture(1)
